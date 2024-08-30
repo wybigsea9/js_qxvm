@@ -1,0 +1,96 @@
+e是https://qcaptcha.iqiyi.com/api/outer/verifycenter/initpage 这个post返回的数据，需要解密。无意中搜索这个post的参数时跟断点看到的 在https://security.iqiyi.com/static/verifycenter/js/verifycenter.js 这个js中：
+
+搜索：cryptVersion
+
+
+ cryptVersion: o[_0xe994("0xa04")]()  跟进去就是n.getVersion()再跟进去，16092下断点，上下看一下，往上翻就会看到 decrypt: function(e, x) { 在16055行
+
+
+
+==============================================================================
+
+e="41A6E7D777EB3D349907ECEFF7CC1E55D5A76D6D9DA6FC0B19DB40B3B0DA172061CB5D8B00662716EF8E5101E3D256CC4848EDE7B053CE204A8A2FA8D8113CAD7AFC15235988E3878501ABBF0FF65A7AB22F9F66CE3D9F96A4E8469CD95F796166B736926C11955E90CC7F7312B63BBA92444778D5FADC0FF4AC8C87A16E644CDDA558B5594AA5F5D3962F08328CE442ED7390302EECF08A85715A68B5DC983B92097520CC8538225F7187F68CB32FAF8DF3B5A448D2E557BCEADCEC7FB8CE390735155E73FC968354552D007F8C17D3727937E6C95B122AE29621DABEEBCC73A272E222C132660F645815F4826BE39457043398488C682C10540712FE353B0904A32E8949869A75822FFF489D7438E564D93711662A90699F73B5E2BAF97FFDFF3EF3B3733CDB77D800E3A0ED6A8A5D50E0367B5D5E646789A1D43A50A2CBD70D00BAD3FEBF1B33C2F272575891C39EF91E4BAEC67C08EB97BF1B1574B07106177291AFBF2CE13C33E95AA851402371F0FA8D5D084D5217C3C3EFFD9EDAE13BBC83EDA283871E76E7030C503F9CBB836C104F70D0AE8AB0C1CE71CAD5EC3493F24F2B2130160FD5273BF758FBC1FCEB4E6B67F59687B2D7A44AAAC2CDA24196A6027D13A6E82D7DB75DA3176106A40DA111368CFEEECC4C534F98AEB7C59F1D429BC01F883657BC6AF31B2C4D79CBDB5BD8057A8E28454E0229D461AEEF2877626951C389B78AF387DC240F6DBA3370F3CDF065EED5DA00A8A2ABEB19383F1A15E7E4464F56A7E4B367826AF7FB691108B78F546F924B6576B55FD5B158567F6325B7A0B4D11E0DC03A9585E8D82F23863DFA2F6A771D0671735EBBB560CEF9CD351422A770F99EE141EB13F92B41DE27DE9F6BB1E8398E429BE2F898690A1E17D64524FB372052166245A3BDD60F285D5F19DB8939E6F4444320293BF67F192D79D2B3F7D12F53E94D433C90A9172C53241417D039245B6104219F810C4F5C584772DA0B870AC5844C3DB57BE9F029EBA57932C72CA39CE6F94CA990C286107B3BC7D4D10C4FD02C3C51F43E1E7A1DD840B85000DFBDCCB27C12B49B10C01EA6B21C2E43846609CFB082081B7035FE4167E4D9E30A661F00701E91531A5C8BF8E8CB94871F8601F1B8AC51F926292E372B8C9D8F39B6FF4AB36BE608AE1F90E1A510BD11FEF66B8A22FCFE2C08CDC0E4528095B9D5D890EE9497C0A7FCEA57F82FD614D8780D9FFDDDB869C5F4B675E419EBA83FDF8D033D8EFA6C587BD045A4FBD74D8DD74DB7E728E35C8D0AC8FB5DDD5E4410CC5DC3C8973B987FC72D1B49A4F8408FC2473C3083332CD4887D63834B0300849F61D798B06FAC14215A12ACE08EE9845241EA8729050370DF201D15EBF0523F37E46041729ABBD5D82E455453089449E959F4F571D84A7003F98C13943C1B666DF2B9E1EA514D5952BF93AAA7A153700DB8B45D9F8240E90FC52B95D81066FC0B15B587E14CE828F0AD5CD440BFBAEC836FC2E076D4C30DC99F0FB125BD1AF47A68A2EADBAE1837C09AE2A34402E3592712EF7845E4FECC9200C438E113DD4943AF24E6CC2D420790C5F7DE8DDE86A1E2E9E5AD802E3B22D6F4CA06A51E4118260716CFD1580BC205A0076DB45573B89464DBF2DC2C74D5DB2BF988653CEFF8F0578F7353C055D7B2C7C50997A6A2C65D60DF42CF612F5AA1CB2A176039FF460AA7C726671861E59A19983CE3977FBFC533949F85E8CCB14CFC7890979713F9B7566E94535D149D0523F9A29F8CA40B0D3F7B631494C9BB0AC81486C9A537BDA773E9B9DB532244AA45F27DA2172A54F10B5E39AE7413083117C8";
+
+decrypt: function(e, x) {
+//..................删掉了一些没进去的
+                                    var i = e.split("|"); //(2)?["41A6E7D777EB3D349907ECEFF7CC1E55D5A76D6D9DA6FC0B19…9B9DB532244AA45F27DA2172A54F10B5E39AE7413083117C8", "99BDF0D77B2FBC6FA7BC9D1F052BD44376FEB90FF1980DB0294649443AC43A75"]
+
+ //..................删掉了一些没进去的
+
+                                    if (f.validateForDecrypt (i.slice(0, i.length - 1), i.slice(-1)[0] ) {
+                                        var n = f.aesDec(i[0]); // 到这里需要找 f.aesDec 跟断点到 16119 行下断点 --- 16140行，申明一下，aesDec之前是0x的那种，自己放到控制台输出看内容
+                                        n.success ? (t[_0xe994("0x2a9")] = !0,
+                                        t[_0xe994("0x390")] = _0xe994("0x882"),
+                                        t[_0xe994("0xf")] = n[_0xe994("0xf")]) : t[_0xe994("0x390")] = _0xe994("0x883") + n.msg
+                                    } else
+                                        t[_0xe994("0x390")] = "signature not match";
+                                    return x && x(t),
+                                    t
+                                }
+
+======================================================================================
+
+aesDec: function(e, x) {
+                                    var t = {
+                                        success: !1,
+                                        data: "",
+                                        msg: _0xe994("0x889")
+                                    };
+                                    if (!o)
+                                        return t.msg = _0xe994("0x87b"),
+                                        a[_0xe994("0x24")](t[_0xe994("0x390")]),
+                                        x && x(t),
+                                        t;
+                                    if (!e)
+                                        return t.msg = _0xe994("0x88a"),
+                                        a[_0xe994("0x24")](t.msg),
+                                        x && x(t),
+                                        t;
+                                    var i = r.decrypt(e); //这里是 16134行，[_0xe994("0x58d")] = decrypt跟进去 这个解密出来就是 【解密的数据】 里的文本，跟进去就是AES很明显iv、mode、padding
+                                    return i ? (t[_0xe994("0x2a9")] = !0,
+                                    t[_0xe994("0xf")] = i,
+                                    t[_0xe994("0x390")] = _0xe994("0x88b")) : t[_0xe994("0x390")] = "aesDec fail",
+                                    x && x(t),
+                                    t
+                                }
+
+【解密的数据】：
+"{"code":"A00000","msg":null,"data":{"captchaType":"slidecode","initData":{"token":"c0aa2a7b7c424be1adc893d4343fd251","captchaType":"slidecode","sourceType":"unUse","secondVerify":null,"secondToken":null,"secodVerify":null,"secodToken":null,"imageBgUrl":"/api/outer/image/bg/c0aa2a7b7c424be1adc893d4343fd251b6fbc662be8d4eec9065ecb3cbb6c565.jpg","imageBlockOffset":[[{"t1":4,"t2":0},{"t1":14,"t2":0},{"t1":3,"t2":0},{"t1":0,"t2":0},{"t1":13,"t2":0},{"t1":12,"t2":0},{"t1":9,"t2":0},{"t1":15,"t2":0},{"t1":11,"t2":0},{"t1":5,"t2":0},{"t1":1,"t2":0},{"t1":17,"t2":0},{"t1":18,"t2":0},{"t1":6,"t2":0},{"t1":2,"t2":0},{"t1":16,"t2":0},{"t1":7,"t2":0},{"t1":10,"t2":0},{"t1":8,"t2":0},{"t1":19,"t2":0}],[{"t1":9,"t2":1},{"t1":11,"t2":1},{"t1":12,"t2":1},{"t1":2,"t2":1},{"t1":17,"t2":1},{"t1":8,"t2":1},{"t1":6,"t2":1},{"t1":0,"t2":1},{"t1":16,"t2":1},{"t1":19,"t2":1},{"t1":14,"t2":1},{"t1":3,"t2":1},{"t1":1,"t2":1},{"t1":7,"t2":1},{"t1":18,"t2":1},{"t1":13,"t2":1},{"t1":5,"t2":1},{"t1":15,"t2":1},{"t1":4,"t2":1},{"t1":10,"t2":1}]],"imageWidth":290,"imageHeight":170,"imageBlockPerWidth":14,"imageBlockPerHeight":85,"iconUrl":"/api/outer/image/icon/c0aa2a7b7c424be1adc893d4343fd251b6fbc662be8d4eec9065ecb3cbb6c565.png","iconWidth":56,"iconHeight":56,"iconYOffset":60},"availableCaptchaList":[]}}"
+
+
+==========================================================================================
+
+下面是上面 16134行跟进来的AES处：这个函数是先 s.enc.Base64.stringify(s.enc.Hex.parse(e)) 自运行把数据解密一次，再进行aes解密
+
+function decrypt(e) {  //15894行
+return e ?
+function a(e) {
+var r = 'AXMGzD7fQ8zPkLaKBNLuCBwSHgZ2Zxr0'; //这个r值在自运行时取出来的
+var x = r;
+var f = 'qwertyuiopasdfgh';
+
+    var t = s.enc.Utf8.parse(x),
+    i = s.enc.Utf8.parse(f),
+    n = s.AES.decrypt(e, t, {
+        mode: s.mode.CBC,
+        padding: s.pad.Pkcs7 ,
+        iv: i
+    }),
+    _ = "";
+    try {
+        _ = n.toString(s.enc.Utf8)
+    } catch(r) {
+        o[_0xe994("0x4ae")](r),
+        _ = !1
+    }
+    return _
+} (s.enc.Base64.stringify(s.enc.Hex.parse(e)), r) : ""   //r值在 15878行  r = _0xe994("0x85d") ，r = 'AXMGzD7fQ8zPkLaKBNLuCBwSHgZ2Zxr0'，先自运行;
+}
+
+
+
+
+
+
+
+

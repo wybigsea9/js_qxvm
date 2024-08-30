@@ -1,0 +1,20 @@
+https://account.ppdai.com/pc/login
+
+curl 'https://passport.ppdai.com/api/passport/pwdLoginService/securityWeb?appid=1000002866' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: zh-CN,zh;q=0.9,en;q=0.8' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json;charset=UTF-8' \
+  -H 'Cookie: bxid=3672918572077826521; sajssdk_2015_cross_new_user=1; ppdSearchEngineUrl=https://www.baidu.com/link?url=auaAaVO32kc-eb3Rm4LYYjp5_fgiJFS8soe9SjYID5S&wd=&eqid=cf1f71b4000d97be00000006664a08c0; Hm_lvt_74a3c81b1c5ae79424a0d778a7f2ab06=1716127943; Hm_lpvt_74a3c81b1c5ae79424a0d778a7f2ab06=1716127943; Hm_lvt_f87746aec9be6bea7b822885a351b00f=1716127947; Hm_lpvt_f87746aec9be6bea7b822885a351b00f=1716127947; sensorsdata2015jssdkcross=data%3Aenc%3B%0A%2Fqv%02%03v%7Bp%03lvq%2FG%2F%3EEsF%3DA%40%3Fr%40BCnC%3A%3DEsn%3DDoFpAAqA%3EE%3A%3EoB%3FBC%40D%3A%3EDCA%3D%3D%3D%3A%3EEsF%3DA%40%3Fr%40CooE%2F9%2Fsv%01%02%03lvq%2FG%2F%2F9%2F%7D%01%7C%7D%02%2FG%0A%2F1yn%03r%02%03l%03%01nssvpl%02%7C%04%01prl%03%08%7Dr%2FG%2F%E8%87%AA%E7%84%B6%E6%90%9C%E7%B4%A2%E6%B5%81%E9%87%8F%2F9%2F1yn%03r%02%03l%02rn%01pulxr%08%06%7C%01q%2FG%2F%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC%2F9%2F1yn%03r%02%03l%01rsr%01%01r%01%2FG%2Fu%03%03%7D%02G%3C%3C%06%06%06%3Bonvq%04%3Bp%7Cz%3Cyv%7Bx%2F%0C9%2F1qr%05vprlvq%2FG%2F%3EEsF%3DA%40%3Fr%40BCnC%3A%3DEsn%3DDoFpAAqA%3EE%3A%3EoB%3FBC%40D%3A%3EDCA%3D%3D%3D%3A%3EEsF%3DA%40%3Fr%40CooE%2F%0C' \
+  -H 'Origin: https://account.ppdai.com' \
+  -H 'Pragma: no-cache' \
+  -H 'Referer: https://account.ppdai.com/' \
+  -H 'Sec-Fetch-Dest: empty' \
+  -H 'Sec-Fetch-Mode: cors' \
+  -H 'Sec-Fetch-Site: same-site' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  --data-raw '{"extraInfo":{"CookieValue":"","FlashValue":"","FpCode":"","_ppdaiWaterMark":"","FromUrl":"","UniqueId":"","UserAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36","sourceId":null,"serial_no":"93bb7ba1-c657-4f66-967d-13438f53dde3","currentUrl":"https://account.ppdai.com/pc/login","ppdSearchEngineUrl":"https://www.baidu.com/link?url=auaAaVO32kc-eb3Rm4LYYjp5_fgiJFS8soe9SjYID5S&wd=&eqid=cf1f71b4000d97be00000006664a08c0","ImgValidateCode":"","ImgValidateToken":""},"sourceId":null,"loginSource":"PcWebLogin","password":"j7Vl/uAxThhfHJK2aTpTXLAi5Qf7dA7c69Vu2II5kcPj51FkDHrChYXv7d46Q0NVG+H6cY3NUuZAq/6bihnhp8qmFnXF3ToYjpvDUgdwmIMScLuDOfpxoNf0BZ7x99I9rrOmQLLdV2JHnFeNazkFzHZG+sjaraEBojqvVXywiTs=","userName":"bfmzK5Xv6PCr6d4ambOtDyO2HFR+b13TxDOSdAKmtAwkeXZwmD6Z897ZBBZVUtuz/zCimW58/LQBruMxDVvnICcLJQZpIAIt+8eQVguUdhZOSqVvXk0syYCDL71TcOQLJx+Mj1eFHaWE7YeAfasxr/EEghgSfmzYanfko+M4n9o="}'

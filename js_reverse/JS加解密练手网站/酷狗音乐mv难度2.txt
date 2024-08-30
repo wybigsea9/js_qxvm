@@ -1,0 +1,7 @@
+https://www.kugou.com/mvweb/html/mv_95.html   比如：贵妃醉酒mv，下面的连接里的key获取。这算是个拓展吧。
+
+
+http://trackermv.kugou.com/interface/index/cmd=100&hash=2A89214273A3BE9EAD2FB0B102AECB18&key=c9286ff28153d496d4d5d0e86b9f2743&pid=6&ext=mp4&ismp3=0
+
+
+通过hash加密，得出key

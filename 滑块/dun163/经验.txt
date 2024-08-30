@@ -1,0 +1,25 @@
+参数1 fingerprint
+2 继续找
+3 var CK = window[jL(0x70c)]; // "gdxidpyhxde"
+4 window[Cr] = null;
+5 最后赋值了 window[Cr] = Cg,
+
+参数2 cb
+1是'cb': C2(),
+2 function C2() {
+              var lk = M
+                , Ci = {
+                  'suffix': 'kz2o4e',
+                  'code': lk(0x24d),
+                  'pos': [0x8, 0xf, 0x11, 0x19, 0x1b, 0x1d]
+              } || {}
+                , Cx = Ci['code']
+                , CF = Ci[lk(0x7d8)]
+                , Cb = CT[lk(0x23d)](0x20);
+              if (Cx && CF && Array[lk(0x5d1)](CF)) {
+                  for (var Cc = Cb[lk(0x491)](''), Cv = 0x0; Cv < CF[lk(0x735)]; Cv++)
+                      Cc[CF[Cv]] = Cx[Cv];
+                  Cb = Cc[lk(0x819)]('');
+              }
+              return Cp(Cb);
+          }

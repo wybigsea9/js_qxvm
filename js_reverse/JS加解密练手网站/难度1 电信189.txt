@@ -1,0 +1,6 @@
+https://login.189.cn/web/login
+
+
+
+包1 ：https://login.189.cn/web/pwd/validate    uPwd加密
+包2 ：https://login.189.cn/web/login  Password加密

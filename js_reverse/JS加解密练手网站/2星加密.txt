@@ -1,0 +1,4 @@
+https://jiexila.attakids.com/vier.php?url=https://v.qq.com/x/cover/vooy2m9hi5p1jqm/f0033j4o0z6.html
+
+
+找到里面的encode_url()算法和lc算法，并抠出来使用

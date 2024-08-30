@@ -1,0 +1,9 @@
+http://www.yijianjiexi.com/  短视频解析
+
+http://www.yijianjiexi.com/ajax/analyze.php    post包里有sign需要解密
+
+data：link=http%3A%2F%2Fv.douyin.com%2FxYrtAo%2F&timestamp=1584079541&sign=731274ef020853ffd9916d52f7a65f42
+
+
+
+

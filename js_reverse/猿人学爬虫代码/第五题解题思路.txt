@@ -1,0 +1,155 @@
+RM4hZBv0dDon443M  固定参数  cookies里面的
+
+直接hookcookies定位参数生成位置 
+
+
+//hook代码 
+(function() {
+    //严谨模式 检查所有错误
+    'use strict';
+    //document 为要hook的对象   这里是hook的cookie
+	var cookieTemp = "";
+    Object.defineProperty(document, 'cookie', {
+		//hook set方法也就是赋值的方法 
+		set: function(val) {
+			if(val.indexOf("RM4hZBv0dDon443M") != -1)
+				//这样就可以快速给下面这个代码行下断点
+				//从而快速定位设置cookie的代码
+				debugger;
+				console.log('Hook捕获到cookie设置->', val);
+				cookieTemp = val;
+				return val;
+		},
+		//hook get方法也就是取值的方法 
+		get: function()
+		{
+			return cookieTemp;
+		}
+    });
+})();
+
+这里我没有使用fd的hook功能 而是手动hook  利用最开始加载的js下断
+
+1-1  :.min.js 第一行下断 手动执行上面的hook代码
+
+通过调试后进入_$k9函数  发现值是承接的 window['_$ss']  全局已缓存的
+既然是缓存的 并且是 全局里面的  我们继续hook window['_$ss']  hook点和之前(1-1)一样 
+
+(function() {
+    //严谨模式 检查所有错误
+    'use strict';
+    //document 为要hook的对象   这里是hook的cookie
+	var cookieTemp = "";
+    Object.defineProperty(window, '_$ss', {
+		//hook set方法也就是赋值的方法 
+		set: function(val) {
+				debugger;
+				cookieTemp = val;
+				return val;
+		},
+		//hook get方法也就是取值的方法 
+		get: function()
+		{
+			return cookieTemp;
+		}
+    });
+})();
+
+通过hook后定位到 加密方法核心
+_$Ww = _$Tk[_$UH[0x2db]][_$UH[0x2dc]][_$UH[0xff]](_$8K['_$pr'][_$UH[0x1f]]()),
+ _$Wu = _$Tk['A' + _$UH[0x32d]][_$UH[0x337] + _$UH[0x336]](_$Ww, _$8K[_$pe('0x6', 'OCbs')], {
+     'mode': _$Tk[_$UH[0x339] + _$UH[0x33a]][_$UH[0x2e5]],
+     'padding': _$Tk[_$UH[0x33b]][_$UH[0x33c] + _$UH[0x33d]]
+ }),
+ _$8K['_$' + _$UH[0x348][0x1] + _$UH[0x353][0x1]] = _$Wu[_$UH[0x1f]]()
+ 
+ 手动整理代码
+ 
+ _$Ww = _$Tk['enc']['Utf8']['parse'](_$8K['_$pr']['toString']()),
+ _$Wu = _$Tk['AES']['encrypt'](_$Ww, _$8K['_$qF']], {
+     'mode': _$Tk['mode']['ECB'],
+     'padding': _$Tk['pad']['Pkcs7']
+ }),
+ _$Wu['toString']()
+ 通过整理代码 发现是AES加密 模式为ECB 所以不需要IV 只需要找到key和 data即可 
+ 
+ 其中key为 _$8K['_$qF'] 为缓存值
+ 
+ data为  _$Ww  也就是 _$8K['_$pr'] 也是一个缓存值
+ 
+ 下面也就是定位两个缓存值的问题 这里这道题并没有隐藏这两个变量的明文 通过搜也是可以搜到的
+ 
+ 通过搜索 找到key定义的代码
+ _$8K['_$qF'] = CryptoJS['enc']['Utf8'][_$UH[255]](_$8K['btoa'](_$8K['_$is']).slice(0, 16))
+ 这句得知 key为 _$8K['_$is']这个缓存值 bs64后取前16位得到的
+ 通过搜索   _$is 得到代码
+ _$yw = _$TT()[_$UH[31]]();
+_$Is[_$Fe] = "m=" + b(_$yw) + "; path=/";
+_$8K['_$is'] = _$yw;
+_$8K['_$pr']['push'](b(_$yw))
+得知_$8K['_$is'] = _$yw; 也就是提交的m参数
+并且吧m参数又写到了cookies 但是后面得知cookies的m并未校验 可以不提交
+
+到此key 已经得到  为   btoa( 提交参数m ).slice(0, 16)
+
+
+下面开始跟data的明文值和加密方法
+通过搜索 _$pr 得到 7个位置  其中第一个位置为 字节数组的定义位置  _$8K['_$pr'] = new _$Kj;
+通过此处可以联想到的思路为 hook Array的push方法得到
+这里就不hook了  直接 给其他5处push下断点 
+通过调试得到 一下代码 
+
+_$8K['_$pr']['push'](b(_$Wa));
+其中_$Wa 为当前时间戳 13位 
+b函数为加密函数 
+跟入b函数 下断点 调试  现在可以清除其他断点了  新建一个页面 通过console的 世上无难事，只要肯放弃
+快速进入虚拟机 用下面b函数的特征定位下断 ,因为有时候浏览器会卡断点,用这个方式可以清除
+b函数
+function b(e, t, n) {
+     return t ? n ? v(t, e) : y(t, e) : n ? m(e) : g(e)
+}
+这里要手动记录每次的e参数值
+我们懒 不想手动记录 可以hook b函数 或者直接hook g函数
+这里的hook点为 想要hook的函数定义位置的下一句代码也就是     var $_oi = 1732584193;
+先在此句下断点后手动执行hook代码  这是为了作用域一致 否则hook无效
+var _bbb = b;
+b = function(e, t, n){
+	//调用原函数进行加密
+	var run_str = _bbb(e,t,n);
+	//输出加密前的值 和 加密后的值 
+	console.log(e + " "+ run_str);
+	//别忘漏了返回 - - 
+	return run_str;
+}
+他这里有个时间校验.如果卡断点或者卡浏览器了的话  重复上面的步骤可以清除
+
+
+得到明文值 
+
+VM8041:6 1603076400000 cede09a08b1592db0f86085a4b57096a
+VM8041:6 1603076400000 cede09a08b1592db0f86085a4b57096a
+VM8041:6 1603076400000 2f085ad571fd2573a14d9e432a11e6c0
+VM8041:6 1603076400000 2f085ad571fd2573a14d9e432a11e6c0
+VM8041:6 1603076400000 81ed883ea4ccfd45588b8cad949c1686
+VM8041:6 1603076400000 81ed883ea4ccfd45588b8cad949c1686
+VM8041:6 1603076400000 d00d1eb527e3115718d4d7069bb8101d
+VM8041:6 1603076400000 d00d1eb527e3115718d4d7069bb8101d
+VM8041:6 1603076400745 10c1ddb738e9bd88ca1780dc996301db
+VM8041:6 1603076400745 10c1ddb738e9bd88ca1780dc996301db
+
+我们手动aes解一下发送的包  如果浏览器现在比较卡的话 可以随便下个断点 让他js先别执行 这样就不会卡了
+
+btoa('1603076400745').slice(0, 16) => 'MTYwMzA3NjQwMDc0'
+
+解到的明文
+cede09a08b1592db0f86085a4b57096a,2f085ad571fd2573a14d9e432a11e6c0,81ed883ea4ccfd45588b8cad949c1686,d00d1eb527e3115718d4d7069bb8101d,10c1ddb738e9bd88ca1780dc996301db
+
+对比发现一致 确认b函数为加密函数 扣出b函数即可
+自己一个个扣吧  注意里面有混淆的 自己手动还原下就好了 
+
+
+
+
+
+ 
+ 

@@ -1,0 +1,6 @@
+https://hotel.bestwehotel.com/NewLogin/?go=https%3A%2F%2Fhotel.bestwehotel.com
+
+登录
+
+password加密
+black_box加密
