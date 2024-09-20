@@ -1,0 +1,4 @@
+[submodule "git_project/qxVm"]
+	path = git_project/qxVm
+	url = git@github.com:ylw00/qxVm.git
+	branch = master
