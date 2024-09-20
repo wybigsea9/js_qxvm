@@ -2,3 +2,6 @@
 	path = git_project/qxVm
 	url = git@github.com:ylw00/qxVm.git
 	branch = master
+[submodule "git_project/node-sandbox"]
+	path = git_project/node-sandbox
+	url = git@github.com:bnmgh1/node-sandbox.git

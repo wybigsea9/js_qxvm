@@ -63,5 +63,6 @@ catvm.safefunction(window.DeviceMotionEvent);
 //////////////////////
 
 // debugger;
+self=window; // 对self的检测
 window = catvm.proxy(window);
 Window = catvm.proxy(Window);
