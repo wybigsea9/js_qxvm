@@ -5,7 +5,7 @@ var catvm2_code = catvm2.GetCode();  // 框架代码
 // debugger;
 // var web_js_code = fs.readFileSync(`${__dirname}/jy.js`) ; // 网站js代码
 // var web_js_code = fs.readFileSync(`${__dirname}/rs.js`) ; // 网站js代码
-var web_js_code = fs.readFileSync(`${__dirname}/../逆向code/xiecheng_testab.js`) ; // 网站js代码
+var web_js_code = fs.readFileSync(`${__dirname}/../逆向code/携程/xiecheng_testab.js`) ; // 网站js代码
 var log_code = "\r\ncatvm.print.getAll();\r\r"
 web_js_code = web_js_code+log_code
 var all_code = catvm2_code+web_js_code;

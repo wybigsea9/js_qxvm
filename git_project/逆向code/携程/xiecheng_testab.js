@@ -26,22 +26,25 @@ var getHotelScript = {
 var eval_code = getHotelScript['Response']
 // console.log(eval_code)
 
-var o = function() {
+var o = function () {
     for (var e = "qwertyuiopasdfg$hjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM", t = "", n = 0; n < 10; n++)
         t += e.charAt(~~(Math.random() * e.length));
+    console.log("t=" + t)
     return t
 }();
 console.log("o=" + o)
 
-function get_testab(callback){
-    window[callback]=function(e){
+function get_testab(callback) {
+    window[callback] = function (e) {
         delete window[callback];
         var e = e()
         testab = e;
         return e;
     }
+    debugger;
     window.eval(eval_code);
     return testab
 }
+
 // get_testab("PMMMLIAoKl")
-get_testab("KLBNxcMKmI")
+console.log(get_testab("KLBNxcMKmI"))
