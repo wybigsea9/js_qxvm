@@ -1,0 +1,12 @@
+a_bogus
+1 xhr url定位到 1567.2c7aa136.js
+return new Promise(function(t, n) 这儿是没有带a_bougs的时候
+2 检测环境在这里,就在这里，打日志  var U = k.apply(A, j);
+a_bogus出来了
+j这里 j=["uoaKMijBBgECmzT6pvtxJhhQdhfJdzC6TEK4jLN8U/7O7+kvcYRip6PHgkQSD721NwMGXr1rLxF4GK+ta+qa5QcDeLzywpocOtnxCedTCBeojW+8pR6R+zP4956kUpmY1EZ622zMmuvR7uIx+iAYF13cDraA"]
+
+index.js打的断点 n.send = function() {
+                             var e = this;
+                             if (1 !== this._vc_status)
+this&&this._vc_actionList ? this._vc_actionList[0]['arguments'][1].indexOf("other") > -1:false
+
