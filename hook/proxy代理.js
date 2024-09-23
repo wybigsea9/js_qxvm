@@ -21,6 +21,5 @@ better_proxy = function (o, callerName){
 window = better_proxy(window, "window")
 document = better_proxy(document, "document")
 navigator = better_proxy(navigator, "navigator")
-location = better_proxy(location, "location")
 history = better_proxy(history, "history")
 screen = better_proxy(screen, "screen")
