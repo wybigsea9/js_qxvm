@@ -23,6 +23,7 @@ function Get_Dom_node_code() {
     code += ReadCode("DOMParser.js");
     code += ReadCode("DOMRectReadOnly.js");
     code += ReadCode("DOMTokenList.js");
+    code += ReadCode("HTMLAllCollection.js")
     code += ReadCode("HTMLCollection.js")
 
     code += ReadCode("Element.js");

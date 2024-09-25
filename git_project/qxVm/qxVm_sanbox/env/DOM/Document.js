@@ -132,7 +132,8 @@ Document = function Document(createObj_key) {//构造函数
         },
         get all() {
             if (!Document.prototype.isPrototypeOf(this)) { throw new TypeError("Illegal constructor"); };
-            let result = $attribute_map.all;
+            // let result = $attribute_map.all;
+            let result = new HTMLAllCollection(lwVm.memory.$createObj_key)
             if (lwVm.config.logOpen === true) lwVm.logAdd('Get', 'Document', 'all', arguments, result);
             return result;
         },
