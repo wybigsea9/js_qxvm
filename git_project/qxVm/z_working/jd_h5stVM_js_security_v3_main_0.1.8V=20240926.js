@@ -6,11 +6,11 @@ function ReadCode(name, dir) {
     return fs.readFileSync(file_path) + "\r\n"
 }
 
-const js_code = ReadCode(`/../../逆向code/京东/h5st_js_security_v3_0.1.8.js`);
+const js_code = ReadCode(`/../../逆向code/京东/h5st_js_security_v3_main_0.1.8.js?v=20240926.js`);
 
 const user_config = {
     isTest: false,
-    compress: true,
+    compress: false,
     runConfig: { proxy: true, logOpen: true},
     window_attribute: {},
     env: {

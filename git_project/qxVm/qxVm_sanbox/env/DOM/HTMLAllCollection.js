@@ -20,8 +20,11 @@ HTMLAllCollection = function HTMLAllCollection(createObj_key) {//构造函数
         get length() {
             if (!HTMLAllCollection.prototype.isPrototypeOf(this)) { throw new TypeError("Illegal constructor"); }
             let result = lwVm.default_envs.document.cookie
-            debugger
-            result = 61;
+            if (lwVm.default_envs.document.all_length !== undefined){
+                result = lwVm.default_envs.document.all_length;
+            }else{
+                result = 1700;
+            }
             if (lwVm.config.logOpen=== true) lwVm.logAdd('Get', 'HTMLAllCollection', 'length', arguments, result);
             return result;
         },
@@ -39,11 +42,10 @@ HTMLAllCollection = function HTMLAllCollection(createObj_key) {//构造函数
         },
     };
     lwVm.set_iterator(HTMLAllCollection);
-    lwVm.rename(HTMLAllCollection.prototype, "Object");
+    lwVm.rename(HTMLAllCollection.prototype, "HTMLAllCollection");
     lwVm.safeDescriptor_addConstructor(HTMLAllCollection);
     lwVm.safe_Objattribute(HTMLAllCollection, $safe_get_attribute, $safe_set_attribute, $safe_func_attribute);
 
-    Object.setPrototypeOf(HTMLAllCollection.prototype, Object.prototype);
 })();
 
 

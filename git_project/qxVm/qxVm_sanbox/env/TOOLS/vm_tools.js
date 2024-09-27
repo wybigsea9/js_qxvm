@@ -20,6 +20,15 @@ lwVm.titleCase = function (str) {
 
 // 将用户设置的属性, 设置为自己的属性
 lwVm.updata_envs = function (user_envs, target_envs) {
+    // 可能设置很多变量， 我这里把不存在默认的user_envs也设置到环境变量中去
+    // 如果default_envs里面不存在设置的user_envs，也设置进去
+    // const target_envs_keys = Object.keys(target_envs);
+    //
+    // for (const key in user_envs) {
+    //     if (target_envs_keys.indexOf(key) > -1) {
+    //         target_envs[key] = user_envs[key];
+    //     }
+    // }
     const target_envs_keys = Object.keys(target_envs);
 
     for (const key in user_envs) {

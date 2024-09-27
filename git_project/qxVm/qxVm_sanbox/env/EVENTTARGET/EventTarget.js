@@ -8,6 +8,7 @@ EventTarget = function EventTarget() {  //构造函数
 
     EventTarget.prototype = {
         addEventListener(type, listener, ...args) {
+            debugger;
             if (!lwVm.memory.listeners.has(type)) { lwVm.memory.listeners.set(type, []) };
 
             lwVm.memory.listeners.get(type).push({

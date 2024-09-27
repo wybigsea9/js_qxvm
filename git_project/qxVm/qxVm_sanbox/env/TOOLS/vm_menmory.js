@@ -48,7 +48,8 @@ lwVm.default_envs = {
         href: "chrome://newtab/"
     },
     document: {
-        cookie: ""
+        cookie: "",
+        all_length: 61
     }
 }
 

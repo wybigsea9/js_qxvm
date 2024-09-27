@@ -133,7 +133,13 @@ Document = function Document(createObj_key) {//构造函数
         get all() {
             if (!Document.prototype.isPrototypeOf(this)) { throw new TypeError("Illegal constructor"); };
             // let result = $attribute_map.all;
-            let result = new HTMLAllCollection(lwVm.memory.$createObj_key)
+            let collection = new HTMLAllCollection(lwVm.memory.$createObj_key);
+            collection[0] = new HTMLDivElement(lwVm.memory.$createObj_key)
+            collection[1] = new HTMLScriptElement(lwVm.memory.$createObj_key)
+            collection[2] = new HTMLScriptElement(lwVm.memory.$createObj_key)
+            collection[3] = new HTMLScriptElement(lwVm.memory.$createObj_key)
+            let result = collection;
+            debugger;
             if (lwVm.config.logOpen === true) lwVm.logAdd('Get', 'Document', 'all', arguments, result);
             return result;
         },
