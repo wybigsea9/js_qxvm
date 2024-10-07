@@ -649,7 +649,7 @@ Document = function Document(createObj_key) {//构造函数
 
             for (let i = 0; i < lwVm.memory.htmlCollection.length; i++) {
                 let node_onj = lwVm.memory.htmlCollection[i];
-                console.log(node_onj.localName, node_onj.localName, tagName)
+                console.log(node_onj.localName, tagName)
                 if (node_onj.localName && node_onj.localName === tagName) {
                     collection[collection_index] = node_onj;
                     collection_index++;

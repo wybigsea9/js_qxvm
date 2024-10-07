@@ -28,7 +28,7 @@ const user_config = {
     }
 }
 // 帮助信息打印
-QXVM_GENERATE.help()
+// QXVM_GENERATE.help()
 
 let result = QXVM_GENERATE.sanbox(js_code, "geth5st", user_config, false);
 let n = {

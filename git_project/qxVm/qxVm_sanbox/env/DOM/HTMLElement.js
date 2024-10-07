@@ -741,6 +741,7 @@ HTMLElement = function HTMLElement(createObj_key) {
         },
         set onload(value) {
             if (!HTMLElement.prototype.isPrototypeOf(this)) { throw new TypeError("Illegal constructor"); };
+            // debugger;
             if (lwVm.config.logOpen=== true) lwVm.logAdd('Set', 'HTMLElement', 'onload', arguments);
             lwVm.memory.private_data.get(this).onload = value + "";
         },

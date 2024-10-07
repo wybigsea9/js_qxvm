@@ -1,4 +1,4 @@
-
+``
 styleMedia = {};  // 未实现
 webkitStorageInfo = {} // 未实现
 speechSynthesis = {}; // 未实现
