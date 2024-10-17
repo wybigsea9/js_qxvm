@@ -1,1 +1,0 @@
-https://login.sdo.com/sdo/Login/LoginSDO.php  登陆密码加密
