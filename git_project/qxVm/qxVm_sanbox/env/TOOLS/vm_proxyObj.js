@@ -9,6 +9,7 @@ function vm_proxyObj(){
         'top',
         'parent',
         'self',
+        'document',
     ];
 
 

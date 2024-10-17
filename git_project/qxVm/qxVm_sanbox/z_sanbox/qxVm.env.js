@@ -36,9 +36,9 @@ function qxVm_env_generate(user_config_str) {
     code += 'lwVm.memory.htmlCollection[0] = new HTMLBodyElement(lwVm.memory.$createObj_key);\r\n\r\n';  // 初始化DOM节点
     code += 'lwVm.memory.htmlCollection[1] = new HTMLHeadElement(lwVm.memory.$createObj_key);\r\n\r\n';  // 初始化DOM节点
 
-    code += `${VM_PROXYOBJ.vm_proxyObj()}\r\n`;  // 设置代理对象
-
     code += `${BASE_OBJ_NODE.Get_frameEnd_code()}\r\n`  // 结束的操作
+
+    code += `${VM_PROXYOBJ.vm_proxyObj()}\r\n`;  // 设置代理对象
 
     return code
 }
