@@ -41,7 +41,9 @@ lwVm.safefunction(Node);
             // 处理高度的检测, 父级的高度=子的高度
             let ele_child = lwVm.memory.private_data.get(aChild);
             let ele_child_style = lwVm.memory.private_data.get(aChild.style);
-            ele_child.offsetHeight = ele_child_style.height;
+            if (ele_child_style != undefined){
+                ele_child.offsetHeight = ele_child_style.height;
+            }
             let ele_this = lwVm.memory.private_data.get(this);
             if (ele_this){
                 if (ele_this.parentNode === ele_child){
@@ -212,9 +214,10 @@ lwVm.safefunction(Node);
             if (lwVm.config.logOpen=== true) lwVm.logAdd('Get', 'Node', 'previousSibling', arguments, result);
             return result;
         },
-        removeChild() {
+        removeChild(child) {
             if (!Node.prototype.isPrototypeOf(this)) { throw new TypeError("Illegal constructor"); };
             let result = undefined;
+            debugger
             if (lwVm.config.logOpen=== true) lwVm.logAdd('Func', 'Node', 'removeChild', arguments, result);
             return result;
         },

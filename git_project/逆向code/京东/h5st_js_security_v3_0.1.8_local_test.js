@@ -1,3 +1,298 @@
+
+window = global;
+__pro__ = process;
+
+
+CSSRuleList = function () {
+}
+CSSStyleDeclaration = function () {
+}
+DOMRectList = function () {
+}
+DOMStringList = function () {
+}
+DOMTokenList = function () {
+}
+DataTransferItemList = function () {
+}
+FileList = function () {
+}
+HTMLAllCollection = function () {
+}
+HTMLCollection = function () {
+}
+HTMLFormElement = function () {
+}
+HTMLSelectElement = function () {
+}
+MediaList = function () {
+}
+MimeTypeArray = function () {
+}
+NamedNodeMap = function () {
+}
+NodeList = function () {
+}
+Plugin = function () {
+}
+PluginArray = function () {
+}
+SVGLengthList = function () {
+}
+SVGNumberList = function () {
+}
+SVGPointList = function () {
+}
+SVGStringList = function () {
+}
+SVGTransformList = function () {
+}
+SourceBufferList = function () {
+}
+StyleSheetList = function () {
+}
+TextTrackCueList = function () {
+}
+TextTrackList = function () {
+}
+TouchList = function () {
+}
+MutationObserver = function () {
+}
+WebKitMutationObserver = function () {
+}
+PromiseRejectionEvent = function () {
+}
+dispatchEvent = function () {
+}
+// regeneratorRuntime = {}
+
+
+window.crypto = {}
+XMLHttpRequest = function () {
+}
+window.document = {
+    querySelector: function () {
+    },
+    all: [],
+    createElement: function (args) {
+        console.log("document_createElement_args:", args)
+        if (args === 'script') {
+            return {
+                parentNode: {
+                    "removeChild": {}
+                },
+
+            }
+        }
+        if (args === 'canvas') {
+            return {
+                getContext: function () {
+                    return {
+                        fillRect: function () {
+                        },
+                        arc: function () {
+                        },
+                        stroke: function () {
+                        },
+                        fillText: function () {
+                        },
+                    }
+                },
+                toDataURL: function () {
+                    return ""
+                }
+            }
+        }
+        return {}
+    },
+    documentElement: {},
+    createEvent: function (args) {
+        console.log("document_createEvent_args:", args)
+    },
+    getElementsByTagName: function (args) {
+        console.log("document_getElementsByTagName_args:", args)
+        if (args == 'head') {
+            return [
+                {
+                    appendChild: function () {
+                        return ''
+                    }
+                }
+            ]
+        }
+        return []
+    },
+    head: {
+        childElementCount: 35
+    },
+    body: {
+        childElementCount: 33
+    },
+    cookie: '脱敏处理，自己补',
+}
+
+localStorage = {
+    getItem: function (key) {
+        return null
+    },
+    removeItem: function (key) {
+        return delete localStorage[key]
+    },
+    setItem: function (key, value) {
+        localStorage[key] = value
+    }
+}
+navigator = {
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+    webdriver: false,
+    languages: [
+        "zh-CN",
+        "zh",
+        "en"
+    ],
+    plugins: {
+        "0": {
+            "0": {},
+            "1": {}
+        },
+        "1": {
+            "0": {},
+            "1": {}
+        },
+        "2": {
+            "0": {},
+            "1": {}
+        },
+        "3": {
+            "0": {},
+            "1": {}
+        },
+        "4": {
+            "0": {},
+            "1": {}
+        }
+    },
+    platform: 'Win32',
+    hardwareConcurrency: 12,
+}
+location = {
+    'host': 'pro.m.jd.com',
+}
+
+delete global;
+delete process;
+delete Buffer;
+delete setImmediate;
+
+dtavm = {}
+dtavm.log = console.log
+function proxy(obj, objname, type) {
+    function getMethodHandler(WatchName, target_obj) {
+        let methodhandler = {
+            apply(target, thisArg, argArray) {
+                if (this.target_obj) {
+                    thisArg = this.target_obj
+                }
+                let result = Reflect.apply(target, thisArg, argArray)
+                if (target.name !== "toString") {
+                    if (target.name === "addEventListener") {
+                        dtavm.log(`调用者 => [${WatchName}] 函数名 => [${target.name}], 传参 => [${argArray[0]}], 结果 => [${result}].`)
+                    } else if (WatchName === "window.console") {
+                    } else {
+                        dtavm.log(`调用者 => [${WatchName}] 函数名 => [${target.name}], 传参 => [${argArray}], 结果 => [${result}].`)
+                    }
+                } else {
+                    dtavm.log(`调用者 => [${WatchName}] 函数名 => [${target.name}], 传参 => [${argArray}], 结果 => [${result}].`)
+                }
+                return result
+            },
+            construct(target, argArray, newTarget) {
+                var result = Reflect.construct(target, argArray, newTarget)
+                dtavm.log(`调用者 => [${WatchName}] 构造函数名 => [${target.name}], 传参 => [${argArray}], 结果 => [${(result)}].`)
+                return result;
+            }
+        }
+        methodhandler.target_obj = target_obj
+        return methodhandler
+    }
+
+    function getObjhandler(WatchName) {
+        let handler = {
+            get(target, propKey, receiver) {
+                let result = target[propKey]
+                if (result instanceof Object) {
+                    if (typeof result === "function") {
+                        dtavm.log(`调用者 => [${WatchName}] 获取属性名 => [${propKey}] , 是个函数`)
+                        return new Proxy(result, getMethodHandler(WatchName, target))
+                    } else {
+                        dtavm.log(`调用者 => [${WatchName}] 获取属性名 => [${propKey}], 结果 => [${(result)}]`);
+                    }
+                    return new Proxy(result, getObjhandler(`${WatchName}.${propKey}`))
+                }
+                if (typeof (propKey) !== "symbol") {
+                    dtavm.log(`调用者 => [${WatchName}] 获取属性名 => [${propKey?.description ?? propKey}], 结果 => [${result}]`);
+                }
+                return result;
+            },
+            set(target, propKey, value, receiver) {
+                if (value instanceof Object) {
+                    dtavm.log(`调用者 => [${WatchName}] 设置属性名 => [${propKey}], 值为 => [${(value)}]`);
+                } else {
+                    dtavm.log(`调用者 => [${WatchName}] 设置属性名 => [${propKey}], 值为 => [${value}]`);
+                }
+                return Reflect.set(target, propKey, value, receiver);
+            },
+            has(target, propKey) {
+                var result = Reflect.has(target, propKey);
+                dtavm.log(`针对in操作符的代理has=> [${WatchName}] 有无属性名 => [${propKey}], 结果 => [${result}]`)
+                return result;
+            },
+            deleteProperty(target, propKey) {
+                var result = Reflect.deleteProperty(target, propKey);
+                dtavm.log(`拦截属性delete => [${WatchName}] 删除属性名 => [${propKey}], 结果 => [${result}]`)
+                return result;
+            },
+            defineProperty(target, propKey, attributes) {
+                var result = Reflect.defineProperty(target, propKey, attributes);
+                dtavm.log(`拦截对象define操作 => [${WatchName}] 待检索属性名 => [${propKey.toString()}] 属性描述 => [${(attributes)}], 结果 => [${result}]`)
+                // debugger
+                return result
+            },
+            getPrototypeOf(target) {
+                var result = Reflect.getPrototypeOf(target)
+                dtavm.log(`被代理的目标对象 => [${WatchName}] 代理结果 => [${(result)}]`)
+                return result;
+            },
+            setPrototypeOf(target, proto) {
+                dtavm.log(`被拦截的目标对象 => [${WatchName}] 对象新原型==> [${(proto)}]`)
+                return Reflect.setPrototypeOf(target, proto);
+            },
+            preventExtensions(target) {
+                dtavm.log(`方法用于设置preventExtensions => [${WatchName}] 防止扩展`)
+                return Reflect.preventExtensions(target);
+            },
+            isExtensible(target) {
+                var result = Reflect.isExtensible(target)
+                dtavm.log(`拦截对对象的isExtensible() => [${WatchName}] isExtensible, 返回值==> [${result}]`)
+                return result;
+            },
+        }
+        return handler;
+    }
+
+    if (type === "method") {
+        return new Proxy(obj, getMethodHandler(objname, obj));
+    }
+    return new Proxy(obj, getObjhandler(objname));
+}
+
+window = proxy(window, "window")
+document = proxy(document, "document")
+navigator = proxy(navigator, "navigator")
+localStorage = proxy(localStorage, "localStorage")
+
+
 var ParamsSign = function () {
     "use strict";
     var t = "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : {};
@@ -1385,8 +1680,13 @@ var ParamsSign = function () {
                 1 == arguments.length ? console.error(t) : console.error(t, r)
             } catch (t) {
             }
-        }, Ls = Vu, Cs = Eu, Ms = Yi, Ns = zu, Ds = ps, Fs = "Promise", Gs = ls.CONSTRUCTOR, Bs = ls.REJECTION_EVENT,
-        Hs = Ms.getterFor(Fs), qs = Ms.set, Us = Ns && Ns.prototype, Js = Ns, Ws = Us, $s = ws.TypeError,
+        }, Ls = Vu, Cs = Eu, Ms = Yi, Ns = zu, Ds = ps, Fs = "Promise",
+        Gs = ls.CONSTRUCTOR,
+        Bs = ls.REJECTION_EVENT,
+        Hs = Ms.getterFor(Fs),
+        qs = Ms.set, Us = Ns && Ns.prototype,
+        Js = Ns,
+        Ws = Us, $s = ws.TypeError,
         Vs = ws.document, zs = ws.process, Ks = Ds.f, Xs = Ks, Ys = !!(Vs && Vs.createEvent && ws.dispatchEvent),
         Qs = "unhandledrejection", Zs = function (t) {
             var r;
@@ -1948,6 +2248,7 @@ var ParamsSign = function () {
         }
     });
     var Nl = Ll;
+    debugger;
 
     function Dl(t, r, e, n, o, i, a) {
         try {
@@ -4473,12 +4774,12 @@ function geth5st(signParams) {
     console.log("end")
 }
 
-// let n = {
-//     "appid": "pc-item-soa",
-//     "functionId": "pc_detailpage_wareBusiness",
-//     "client": "pc",
-//     "clientVersion": "1.0.0",
-//     "t": 1727274328601,
-//     "body": "187ed1cc5ee463d139bf993c2d1cc320faee89ad2652294cd79b2468876e627f"
-// }
-// geth5st(n)
+let n = {
+    "appid": "pc-item-soa",
+    "functionId": "pc_detailpage_wareBusiness",
+    "client": "pc",
+    "clientVersion": "1.0.0",
+    "t": 1727274328601,
+    "body": "187ed1cc5ee463d139bf993c2d1cc320faee89ad2652294cd79b2468876e627f"
+}
+geth5st(n)

@@ -102,10 +102,9 @@ function proxy(obj, objname, type) {
 }
 
 window = proxy(window, "window")
-// document = proxy(document, "document")
-// navigator = proxy(navigator, "navigator")
-// history = proxy(history, "history")
-// screen = proxy(screen, "screen")
+document = proxy(document, "document")
+navigator = proxy(navigator, "navigator")
+screen = proxy(screen, "screen")
 
 
 var getHotelScript = {
